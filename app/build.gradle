@@ -1,0 +1,312 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+    defaultConfig {
+        applicationId "com.transsnet.kika"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+/*    多渠道打包参考网址：https://blog.csdn.net/u010356768/article/details/93631328*/
+
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+        }
+
+        release {
+            keyAlias 'palmcredit'
+            keyPassword '18031988'
+            storeFile file('palmcredit.keystore')
+            storePassword '18031988'
+        }
+    }
+
+    buildTypes {
+        dev {
+            // Zipalign优化
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://dev-palmcredit.palmcash.com:7014/appserver/\""
+            buildConfigField "String", "KEY", "\"ce6804d88d2f73d387c51fee5f99f15fff062e63\""
+            buildConfigField "String", "SECRET", "\"f4a810a392ea3e1230e574661489469a225ee5cf58472bc2ce9ea7d1b4394ce8b6aca070870eda10e4f21eb1a9765dd6e662a4ca202e44106c4fdefe89bd2e38\""
+            buildConfigField "int", "TUDCENV", "1"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-us-west-2.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://testing-palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://test-openapi.transspay.net/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "1"
+//            buildConfigField "String", "BIGDATA_BASE_URL",   "\"https://testing-bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"http://10.240.36.209:8099/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://testing-bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "0" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"86\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://testing-xcross.palmcredit.loans/\""
+            //XCross展示入口
+
+            versionNameSuffix "-dev(" + defaultConfig.versionCode + ")" //versionName后缀，表示是开发版本
+            signingConfig signingConfigs.debug
+        }
+
+        debugTest {
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://testing-palmcredit-app-ng.palmcash.com/appserver/\""
+            buildConfigField "String", "KEY", "\"ce6804d88d2f73d387c51fee5f99f15fff062e63\""
+            buildConfigField "String", "SECRET", "\"f4a810a392ea3e1230e574661489469a225ee5cf58472bc2ce9ea7d1b4394ce8b6aca070870eda10e4f21eb1a9765dd6e662a4ca202e44106c4fdefe89bd2e38\""
+            matchingFallbacks = ['debugTest', 'debugTest']
+            buildConfigField "int", "TUDCENV", "0"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-us-west-2.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://testing-palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://test-openapi.transspay.net/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "2"
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"https://testing-bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://testing-bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "0" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"86\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://testing-xcross.palmcredit.loans/\""
+            //XCross展示入口
+
+            versionNameSuffix "_testing(" + defaultConfig.versionCode + ")" //versionName后缀，表示是测试版本
+            signingConfig signingConfigs.debug
+        }
+
+        debug.initWith(debugTest)
+
+        debugRelease {
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources true
+            minifyEnabled true
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://testing-palmcredit-app-ng.palmcash.com/appserver/\""
+            buildConfigField "String", "KEY", "\"ce6804d88d2f73d387c51fee5f99f15fff062e63\""
+            buildConfigField "String", "SECRET", "\"f4a810a392ea3e1230e574661489469a225ee5cf58472bc2ce9ea7d1b4394ce8b6aca070870eda10e4f21eb1a9765dd6e662a4ca202e44106c4fdefe89bd2e38\""
+            matchingFallbacks = ['debugTest', 'debugTest']
+            buildConfigField "int", "TUDCENV", "0"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-us-west-2.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://testing-palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://test-openapi.transspay.net/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "2"
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"https://testing-bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://testing-bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "0" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"86\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://testing-xcross.palmcredit.loans/\""
+
+            //XCross展示入口
+
+            versionNameSuffix "_testing(" + defaultConfig.versionCode + ")" //versionName后缀，表示是测试版本
+            signingConfig signingConfigs.release
+        }
+
+        risk_debug {
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://risk-testing-palmcredit-app.palmcash.com/appserver/\""
+            buildConfigField "String", "KEY", "\"ce6804d88d2f73d387c51fee5f99f15fff062e63\""
+            buildConfigField "String", "SECRET", "\"f4a810a392ea3e1230e574661489469a225ee5cf58472bc2ce9ea7d1b4394ce8b6aca070870eda10e4f21eb1a9765dd6e662a4ca202e44106c4fdefe89bd2e38\""
+            matchingFallbacks = ['risk_debug', 'risk_debug']
+            buildConfigField "int", "TUDCENV", "0"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-us-west-2.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://testing-palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://test-openapi.transspay.net/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "2"
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"https://risk-testing-bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://risk-bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "0" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"86\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://testing-xcross.palmcredit.loans/\""
+            //XCross展示入口
+
+            versionNameSuffix "_risk_testing(" + defaultConfig.versionCode + ")"
+            //versionName后缀，表示是风控的测试版本
+            signingConfig signingConfigs.debug
+        }
+
+        pay_debug {
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://pay-testing-palmcredit-app.palmcash.com/appserver/\""
+            buildConfigField "String", "KEY", "\"ce6804d88d2f73d387c51fee5f99f15fff062e63\""
+            buildConfigField "String", "SECRET", "\"f4a810a392ea3e1230e574661489469a225ee5cf58472bc2ce9ea7d1b4394ce8b6aca070870eda10e4f21eb1a9765dd6e662a4ca202e44106c4fdefe89bd2e38\""
+            matchingFallbacks = ['pay_debug', 'pay_debug']
+            buildConfigField "int", "TUDCENV", "0"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-us-west-2.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://testing-palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://test-openapi.transspay.net/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "2"
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"https://pay-testing-bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://pay-bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "0" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"86\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://testing-xcross.palmcredit.loans/\""
+            //XCross展示入口
+
+            versionNameSuffix "_pay_testing(" + defaultConfig.versionCode + ")"
+            //versionName后缀，表示是支付的测试版本
+            signingConfig signingConfigs.debug
+        }
+
+        risk_release {
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://risk-testing-palmcredit-app.palmcash.com/appserver/\""
+            buildConfigField "String", "KEY", "\"ce6804d88d2f73d387c51fee5f99f15fff062e63\""
+            buildConfigField "String", "SECRET", "\"f4a810a392ea3e1230e574661489469a225ee5cf58472bc2ce9ea7d1b4394ce8b6aca070870eda10e4f21eb1a9765dd6e662a4ca202e44106c4fdefe89bd2e38\""
+            buildConfigField "int", "TUDCENV", "0"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-us-west-2.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://testing-palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://test-openapi.transspay.net/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "2"
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"https://risk-testing-bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://risk-bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "0" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"86\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://testing-xcross.palmcredit.loans/\""
+            //XCross展示入口
+
+            versionNameSuffix "_risk_testing(" + defaultConfig.versionCode + ")"
+            //versionName后缀，表示是风控的测试版本
+            matchingFallbacks = ['risk_release', 'risk_release']
+            signingConfig signingConfigs.debug
+        }
+
+        prod_debug {
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://palmcredit-app.palmcash.com/appserver/\""
+            buildConfigField "String", "KEY", "\"5f5bab8ce37c626dc3b04aa3d16f66fef3700e35\""
+            buildConfigField "String", "SECRET", "\"694b9e741c214743c8d405c666e138af9a28d32301e1150744fbf0403e01b0f96c4b10d3e4b6d6b096f29cf84796bbfb9052d1a6a87567d6d062a162c266a9d6\""
+            buildConfigField "int", "TUDCENV", "2"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-eu-west-1.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://openapi.transspay.net/#/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "4"
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"https://bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "0" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"234\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://xcross.palmcredit.loans/\""
+            //XCross展示入口
+
+            versionNameSuffix "_prod_debug(" + defaultConfig.versionCode + ")"
+            //versionName后缀，表示是线上带有日志和未压缩的版本
+            matchingFallbacks = ['prod_debug', 'prod_debug']
+            signingConfig signingConfigs.release
+        }
+
+        prod_release {
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://palmcredit-app.palmcash.com/appserver/\""
+            buildConfigField "String", "KEY", "\"5f5bab8ce37c626dc3b04aa3d16f66fef3700e35\""
+            buildConfigField "String", "SECRET", "\"694b9e741c214743c8d405c666e138af9a28d32301e1150744fbf0403e01b0f96c4b10d3e4b6d6b096f29cf84796bbfb9052d1a6a87567d6d062a162c266a9d6\""
+            buildConfigField "int", "TUDCENV", "2"
+            buildConfigField "String", "APPLOG_URL", "\"https://s3-eu-west-1.amazonaws.com/\""
+            buildConfigField "String", "H5_URL", "\"https://palmcredit-web.palmcash.com/\""
+            buildConfigField "String", "PALMPAY_URL", "\"https://openapi.transspay.net/#/\""
+            buildConfigField "int", "RUN_CREDIT_ENVIRONMENT", "4"
+            buildConfigField "String", "BIGDATA_BASE_URL", "\"https://bigdata-credit.palmcash.com/\""
+            buildConfigField "String", "GET_KEY_URL", "\"https://bigdata-track.palmcash.com/\""
+            buildConfigField "int", "IS_PROD_VERSION", "1" //是否为生产版本 1 为 生产版本 0 为 非生产版本
+            buildConfigField "String", "COUNTRY_CODE", "\"234\""
+
+            buildConfigField "String", "XCROSS_BASE_URL", "\"https://xcross.palmcredit.loans/\""
+            //XCross展示入口
+
+            matchingFallbacks = ['release', 'release']
+            signingConfig signingConfigs.release
+        }
+        release.initWith(prod_release)
+    }
+
+
+    flavorDimensions("credit_channel")
+    productFlavors {
+        googleplay {
+            manifestPlaceholders = [MY_CHANNEL_VALUE: "googleplay"]
+            dimension "credit_channel"
+        }
+        palmstore {
+            manifestPlaceholders = [MY_CHANNEL_VALUE: "palmstore"]
+            dimension "credit_channel"
+        }
+
+        transsion_ad {
+            manifestPlaceholders = [MY_CHANNEL_VALUE: "transsion-ad"]
+            dimension "credit_channel"
+        }
+
+        transsion_install {
+            manifestPlaceholders = [MY_CHANNEL_VALUE: "transsion-install"]
+            dimension "credit_channel"
+        }
+
+        transsnet_official {
+            manifestPlaceholders = [MY_CHANNEL_VALUE: "transsnet-official"]
+            dimension "credit_channel"
+        }
+        transsnet_shalltryint {
+            manifestPlaceholders = [MY_CHANNEL_VALUE: "shalltry_int"]
+            dimension "credit_channel"
+        }
+    }
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    implementation 'com.blankj:utilcode:1.15.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

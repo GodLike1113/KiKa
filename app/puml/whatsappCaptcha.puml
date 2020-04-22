@@ -1,0 +1,19 @@
+@startuml
+activate 登录或授信动态验证码页
+activate AppServer
+
+登录或授信动态验证码页->AppServer:请求显示whatsApp和语音验证码（授信动态验证无）显示状态
+   alt 请求成功
+   登录或授信动态验证码页->登录或授信动态验证码页:结果显示
+   else 请求失败
+   登录或授信动态验证码页->登录或授信动态验证码页:toast透传消息，默认隐藏
+   end
+
+ 登录或授信动态验证码页->AppServer:点击【Get Verification Code with WhatsApp】\n请求发送WhatsApp验证码
+   alt 发送验证码成功
+    登录或授信动态验证码页->登录或授信动态验证码页:toast提示“The code has been sent to your WhatsApp account”\n【Get Verification Code】置灰且不可点击并显示60s倒计时\n倒计时结束按钮高亮可点击
+   else 请求失败
+    登录或授信动态验证码页->登录或授信动态验证码页:toast透传消息
+   end
+
+@enduml

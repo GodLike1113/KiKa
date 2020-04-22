@@ -35,34 +35,34 @@ public class MainActivity extends AppCompatActivity {
 
 
         mHander.sendMessageDelayed(msg,300000);
-        et = findViewById(R.id.et);
-
-
-        et.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                log("afterTextChanged - " + s.toString());
-            }
-        });
-
-
-        et.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                log("onKey-- "+event.getKeyCode());
-                return false;
-            }
-        });
+//        et = findViewById(R.id.et);
+//
+//
+//        et.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                log("afterTextChanged - " + s.toString());
+//            }
+//        });
+//
+//
+//        et.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                log("onKey-- "+event.getKeyCode());
+//                return false;
+//            }
+//        });
     }
 
     public  void log(String log) {

@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -211,6 +212,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             case R.id.et9:
             case R.id.et10:
                 calculate(v);
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
                 break;
         }
     }

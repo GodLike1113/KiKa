@@ -1,0 +1,19 @@
+@startuml
+activate 首页
+activate AppServer
+
+首页->AppServer:查询当前阶段信息
+AppServer-->首页:返回阶段信息
+
+alt 阶段信息为 Refused
+首页->AppServer:请求是否在惩罚期
+AppServer-->首页:返回惩罚期结果
+    alt 在惩罚期
+    首页->首页:显示【Retry later】,新增标题提示语样式\n点击【Retry later】,跳转至授信拒绝页引导上传银行流水；
+    else 不在惩罚期
+    首页->首页:显示【Test】,点击跳转至工作信息页引导授信；
+    end
+else 阶段信息不为 Refused
+    首页->首页:显示【Test】文案，点击跳转对应页
+end
+@enduml

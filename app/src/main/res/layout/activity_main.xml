@@ -4,11 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et"
-        android:layout_width="match_parent"
-        android:layout_marginTop="12dp"
-        android:inputType="number"
-        android:layout_height="50dp" />
+    <com.transsnet.kika.custom.VoiceView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="#00ff00" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
+            android:background="#70ff0000" />
+    </com.transsnet.kika.custom.VoiceView>
 </LinearLayout>

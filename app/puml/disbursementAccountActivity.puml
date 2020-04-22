@@ -1,0 +1,27 @@
+@startuml
+activate 提现页
+activate AppServer
+activate 账户列表页
+
+提现页->AppServer:请求银行账户列表
+AppServer-->提现页:返回银行账户列表
+提现页->提现页:遍历银行账户，取默认标记银行账户进行显示
+
+提现页->AppServer:选择银行账户：点击调用verifyPalmpay.do
+AppServer-->提现页:返回PalmPay开户状态
+
+提现页->账户列表页:PalmPay开户状态和是否认证字段传至银行账户列表页
+
+账户列表页->账户列表页:根据字段显示不同结果
+
+    alt PalmPay账户已开通
+        alt PalmPay账户已认证
+        账户列表页->账户列表页:显示跟银行账户一样的功能和样式
+        else PalmPay账户未认证
+         账户列表页->账户列表页:PalmPay条目进行隐藏
+        end
+    else PalmPay账户未开通
+        账户列表页->账户列表页:显示【Activate Now】按钮点击整个条目\n或该按钮跳转手动激活PalmPay页
+    end
+
+@enduml

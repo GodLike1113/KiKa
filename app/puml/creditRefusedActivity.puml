@@ -1,6 +1,27 @@
 @startuml
+activate UnderConsider页
+activate 授信失败结果页
 activate 首页
 activate AppServer
+
+UnderConsider页->AppServer:点击查询阶段信息
+AppServer-->UnderConsider页:返回当前阶段信息
+    alt 授信拒绝
+    UnderConsider页->AppServer:查询用户标签
+    AppServer-->UnderConsider页:返回用户标签
+        alt 在标签中
+        UnderConsider页->授信失败结果页:显示上传银行流水按钮和对应文案
+        授信失败结果页->授信失败结果页:点击上传银行流水按钮\n跳转上传银行流水页，\n上传完流水toast跳转至首页
+        else 未在标签中
+         UnderConsider页->授信失败结果页:隐藏上传银行流水按钮和对应文案
+         授信失败结果页->授信失败结果页:点击按钮跳转至首页
+        end
+
+    else 授信成功
+    UnderConsider页->UnderConsider页:跳转至授信成功结果页
+    else 授信中
+    UnderConsider页->UnderConsider页:跳转至首页
+    end
 
 首页->AppServer:查询当前阶段信息
 AppServer-->首页:返回阶段信息
@@ -9,7 +30,14 @@ alt 阶段信息为 Refused
 首页->AppServer:请求是否在惩罚期
 AppServer-->首页:返回惩罚期结果
     alt 在惩罚期
-    首页->首页:显示【Retry later】,新增标题提示语样式\n点击【Retry later】,跳转至授信拒绝页引导上传银行流水；
+    首页->首页:显示【Retry later】,新增标题提示语样式
+    首页->AppServer:点击【Retry later】,查询用户标签信息
+    AppServer-->首页:返回用户标签信息
+        alt 用户在标签中
+        首页->授信失败结果页:跳转至授信拒绝页引导上传银行流水
+        else 用户未在标签中
+         首页->授信失败结果页:跳转至授信拒绝页不上传银行流水
+        end
     else 不在惩罚期
     首页->首页:显示【Test】,点击跳转至工作信息页引导授信；
     end

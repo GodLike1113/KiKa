@@ -20,4 +20,8 @@
             android:layout_marginTop="50dp"
             android:background="#70ff0000" />
     </com.transsnet.kika.custom.VoiceView>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="500dp"
+        android:layout_height="200dp" />
 </LinearLayout>

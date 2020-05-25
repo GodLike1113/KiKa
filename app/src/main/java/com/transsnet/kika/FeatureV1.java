@@ -12,4 +12,8 @@ public class FeatureV1 {
     public void createTag(Context context){
         Toast.makeText(context,"创建了Tag",Toast.LENGTH_LONG).show();
     }
+
+    public void t(){
+        System.out.println("hhh");
+    }
 }

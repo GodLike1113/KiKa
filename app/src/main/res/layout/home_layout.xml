@@ -13,6 +13,7 @@
         android:textColor="#302D58"
         android:visibility="gone" />
 
+
     <com.transsnet.kika.custom.MyScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"

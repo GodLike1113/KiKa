@@ -115,8 +115,5 @@
         </LinearLayout>
     </com.transsnet.kika.custom.MyScrollView>
 
-    <android.support.v4.view.ViewPager
-        android:layout_width="500dp"
-        android:layout_height="200dp" />
 
 </LinearLayout>

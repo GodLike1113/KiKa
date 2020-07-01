@@ -15,7 +15,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ScreenUtils;
+
 import com.transsnet.kika.custom.MyScrollView;
 import com.transsnet.kika.custom.SoftKeyBoardListener;
 
@@ -63,6 +63,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         et8 = findViewById(R.id.et8);
         et9 = findViewById(R.id.et9);
         et10 = findViewById(R.id.et10);
+
+        et1.setText(BuildConfig.VERSION_NAME);
+        et2.setText(BuildConfig.BUILD_TYPE);
     }
 
     private void initListener() {

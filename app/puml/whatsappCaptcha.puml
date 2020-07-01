@@ -6,7 +6,7 @@ activate AppServer
    alt 请求成功
    登录或授信动态验证码页->登录或授信动态验证码页:结果显示
    else 请求失败
-   登录或授信动态验证码页->登录或授信动态验证码页:toast透传消息，默认隐藏
+   登录或授信动态验证码页->登录或授信动态验证码页:默认隐藏
    end
 
  登录或授信动态验证码页->AppServer:点击【Get Verification Code with WhatsApp】\n请求发送WhatsApp验证码

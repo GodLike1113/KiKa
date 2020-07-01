@@ -13,6 +13,7 @@
         android:textColor="#302D58"
         android:visibility="gone" />
 
+
     <com.transsnet.kika.custom.MyScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
@@ -48,6 +49,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/edittext_shape" />
+
             <EditText
                 android:id="@+id/et4"
                 android:hint="4"
@@ -65,6 +67,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/edittext_shape" />
+
             <TextView
                 android:id="@+id/et6"
                 android:hint="6"
@@ -73,6 +76,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/edittext_shape" />
+
             <EditText
                 android:id="@+id/et7"
                 android:hint="7"
@@ -81,6 +85,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/edittext_shape" />
+
             <EditText
                 android:id="@+id/et8"
                 android:hint="8"
@@ -89,6 +94,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/edittext_shape" />
+
             <EditText
                 android:id="@+id/et9"
                 android:hint="9"
@@ -97,6 +103,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/edittext_shape" />
+
             <EditText
                 android:id="@+id/et10"
                 android:hint="10"

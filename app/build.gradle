@@ -7,8 +7,8 @@ android {
         applicationId "com.transsnet.kika"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(project.APP_VERSION_CODE)
+        versionName project.APP_VERSIONS_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -264,6 +264,33 @@ android {
         release.initWith(prod_release)
     }
 
+    //打包输出名字
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            //输出
+            def outDirectory
+            def buildType = variant.variantData.variantConfiguration.buildType.name
+            //是否为Jenkins打包，输出路径不同
+            if ("true".equals(project.IS_JENKINS)) {
+                //BUILD_PATH为服务器输出路径
+                if (buildType.equals("prod_release")) {
+                    outDirectory = "kiki" + "_" + variant.versionName + "_" + variant.productFlavors[0].name + "(" + variant.versionCode + ")_" + buildType + ".apk"
+                } else {
+                    outDirectory = "kiki" + "_" + variant.versionName + "_" + buildType + ".apk"
+                }
+            } else {
+                if (buildType.equals("prod_release")) {
+                    outDirectory = "kiki" + "_" + variant.versionName + "_" + variant.productFlavors[0].name + "(" + variant.versionCode + ")_" + buildType + ".apk"
+                } else {
+                    outDirectory = "kiki" + "_" + variant.versionName + "_" + buildType + ".apk"
+                }
+            }
+            outputFileName = outDirectory
+        }
+    }
+
+
+
 
     flavorDimensions("credit_channel")
     productFlavors {
@@ -305,6 +332,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation 'com.blankj:utilcode:1.15.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     testImplementation 'junit:junit:4.12'
 }

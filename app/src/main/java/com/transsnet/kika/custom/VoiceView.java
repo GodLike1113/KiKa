@@ -1,6 +1,7 @@
 package com.transsnet.kika.custom;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -79,16 +80,16 @@ public class VoiceView extends LinearLayout {
 //        mPaint.setColor(Color.parseColor("#302D58"));
     }
 
-//    @Override
-//    protected void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
-//
-////        canvas.drawCircle(50,50,40,mPaint);
-//        canvas.drawRect(50,50,100,100,mPaint);
-//
-////        RectF rectF = new RectF()
-////        canvas.drawColor(Color.parseColor("#302D58"));
-//    }
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+//        canvas.drawCircle(50,50,40,mPaint);
+        canvas.drawRect(50,50,100,100,mPaint);
+
+//        RectF rectF = new RectF()
+//        canvas.drawColor(Color.parseColor("#302D58"));
+    }
 
     public void log(String log){
         Log.i("vivi",log);

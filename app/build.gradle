@@ -334,5 +334,8 @@ dependencies {
     implementation 'com.blankj:utilcode:1.15.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
+//    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0" //LiveData + liveModel
+//    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"//LiveData +liveModel
+
     testImplementation 'junit:junit:4.12'
 }

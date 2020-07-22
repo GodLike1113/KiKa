@@ -36,4 +36,10 @@
         android:orientation="vertical">
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="center"/>
 </LinearLayout>

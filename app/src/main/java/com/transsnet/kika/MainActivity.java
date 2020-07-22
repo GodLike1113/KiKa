@@ -1,21 +1,23 @@
 package com.transsnet.kika;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.transsnet.kika.custom.SingVoiceView;
+import com.transsnet.kika.glide.GlideApp;
+import com.transsnet.kika.glide.GlideUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -40,51 +42,16 @@ public class MainActivity extends AppCompatActivity {
         myHandler.sendMessage(msg);
 //        ViewModelProvider viewModelProvider =  new ViewModelProviders(this);
 
-//        mHander.sendMessageDelayed(msg,300000);
-//        et = findViewById(R.id.et);
-//
-//
-//        et.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                log("afterTextChanged - " + s.toString());
-//            }
-//        });
-//
-//
-//        et.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                log("onKey-- "+event.getKeyCode());
-//                return false;
-//            }
-//        });
-
         container = findViewById(R.id.container);
+        ImageView imageView = findViewById(R.id.imageview);
+        String url ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595409534317&di=ba00cb4898785f627331cdada1386897&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201604%2F23%2F002205xqdkj84gnw4oi85v.jpg";
+        GlideUtil.loadPicture(this,url,imageView);
         test();
     }
 
     public  void log(String log) {
         Log.d("vivi", log);
     }
-
-//    Handler mHander = new Handler(){
-//        @Override
-//        public void handleMessage(@NonNull Message msg) {
-//            super.handleMessage(msg);
-//            log("hhhh");
-//        }
-//    };
 
 
     static class MyHandler  extends Handler{
@@ -125,10 +92,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        voiceView.releaseView();
-        voiceView = null;
+        if(voiceView!=null){
+            voiceView.releaseView();
+            voiceView = null;
+        }
+        if(voiceView1!=null)
         voiceView1.releaseView();
         voiceView1 = null;
+        if(voiceView2!=null)
         voiceView2.releaseView();
         voiceView2 = null;
 

@@ -337,5 +337,9 @@ dependencies {
 //    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0" //LiveData + liveModel
 //    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"//LiveData +liveModel
 
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'   //Glide相关
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
     testImplementation 'junit:junit:4.12'
 }

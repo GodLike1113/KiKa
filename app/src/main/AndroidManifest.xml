@@ -23,6 +23,8 @@
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize"/>
 
+        <service android:name=".util.OkhttpDownloadFileService"/>
+
 
         <meta-data
             android:name="credit_channel"

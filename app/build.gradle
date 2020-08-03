@@ -337,9 +337,17 @@ dependencies {
 //    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0" //LiveData + liveModel
 //    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"//LiveData +liveModel
 
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'   //Glide相关
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     testImplementation 'junit:junit:4.12'
 }

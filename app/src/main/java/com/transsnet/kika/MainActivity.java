@@ -13,22 +13,19 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.transsnet.kika.custom.SingVoiceView;
 import com.transsnet.kika.custom.WatchView;
 import com.transsnet.kika.glide.GlideUtil;
 import com.transsnet.kika.util.OkhttpDownloadFileService;
+import com.transsnet.kika.viewmodel.User;
 import com.transsnet.kika.viewmodel.UserModel;
 
 import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText et;
    MyHandler myHandler ;
     private LinearLayout container;
     private SingVoiceView voiceView;
@@ -57,9 +54,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OkhttpDownloadFileService.class);
         startService(intent);
 
+        setData();
 
-
-        UserModel userModel = ViewModelProviders.of(this).get(UserModel.class);
     }
 
     public  void log(String log) {
@@ -116,5 +112,14 @@ public class MainActivity extends AppCompatActivity {
         voiceView2.releaseView();
         voiceView2 = null;
 
+    }
+
+
+    private void setData() {
+        User user  = new User();
+        user.setAge(18);
+        user.setName("lyq");
+        UserModel userModel = new ViewModelProvider(this).get(UserModel.class);
+        userModel.setUserLiveData(user);
     }
 }

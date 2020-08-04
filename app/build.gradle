@@ -12,6 +12,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 /*    多渠道打包参考网址：https://blog.csdn.net/u010356768/article/details/93631328*/
 
     signingConfigs {
@@ -337,8 +342,17 @@ dependencies {
 //    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0" //LiveData + liveModel
 //    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"//LiveData +liveModel
 
-    implementation "android.arch.lifecycle:extensions:1.1.0"
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+/*    https://developer.android.google.cn/jetpack/androidx/releases/lifecycle#declaring_dependencies*/
+    def lifecycle_version = "2.2.0"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // Annotation processor
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'   //Glide相关
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'

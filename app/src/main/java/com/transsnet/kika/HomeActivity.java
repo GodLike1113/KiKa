@@ -16,15 +16,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.transsnet.kika.custom.MyScrollView;
 import com.transsnet.kika.custom.SoftKeyBoardListener;
+import com.transsnet.kika.viewmodel.User;
+import com.transsnet.kika.viewmodel.UserModel;
 
 /**
  * Author:  zengfeng
  * Time  :  2020/4/13 11:16
  * Des   :
  */
-public class HomeActivity extends Activity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MyScrollView scrollView;
     private EditText et1;
@@ -48,6 +54,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         initView();
 
         initListener();
+
+        showViewModelData();
     }
 
     private void initView() {
@@ -205,7 +213,14 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.et1:
+                calculate(v);
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+                break;
             case R.id.et2:
+                Intent intent2 = new Intent(this,LiveDataActivity.class);
+                startActivity(intent2);
+                break;
             case R.id.et3:
             case R.id.et4:
             case R.id.et5:
@@ -214,10 +229,20 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             case R.id.et8:
             case R.id.et9:
             case R.id.et10:
-                calculate(v);
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
                 break;
         }
     }
+
+    private void showViewModelData(){
+        //此处观察数据变化
+        ViewModelProvider viewModelProvider = new ViewModelProvider(this);
+        UserModel userModel = viewModelProvider.get(UserModel.class);
+        userModel.getUserLiveData().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                et3.setText("name ="+user.getName()+",age ="+user.getAge());
+            }
+        });
+    }
+
 }

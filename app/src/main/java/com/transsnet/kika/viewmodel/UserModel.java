@@ -1,5 +1,8 @@
 package com.transsnet.kika.viewmodel;
 
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -18,11 +21,16 @@ public class UserModel extends ViewModel {
         mUserLiveData.setValue(user);
     }
 
-    public MutableLiveData<User> getUserLiveData() {
+    public LiveData<User> getUserLiveData() {
         if (mUserLiveData == null) {
             mUserLiveData = new MutableLiveData<>();
         }
         return mUserLiveData;
     }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        Log.d("vivi","UserModel onCleared");
+    }
 }

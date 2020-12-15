@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private SingVoiceView voiceView;
     private SingVoiceView voiceView1;
     private SingVoiceView voiceView2;
+    private WatchView wv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         container = findViewById(R.id.container);
         ImageView imageView = findViewById(R.id.imageview);
-        WatchView wv =findViewById(R.id.wv);
+        wv = findViewById(R.id.wv);
         wv.start();
         String url ="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595409534317&di=ba00cb4898785f627331cdada1386897&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201604%2F23%2F002205xqdkj84gnw4oi85v.jpg";
         GlideUtil.loadPicture(this,url,imageView);
@@ -111,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         if(voiceView2!=null)
         voiceView2.releaseView();
         voiceView2 = null;
+
+        wv.recycleMemory();
 
     }
 

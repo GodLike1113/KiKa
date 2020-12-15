@@ -404,4 +404,9 @@ public class WatchView extends View {
 			}
 		}, 1000);
 	}
+
+	public void recycleMemory(){
+		isRunning = false;
+		handler.removeCallbacksAndMessages(null);
+	}
 }

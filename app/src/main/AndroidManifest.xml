@@ -3,8 +3,8 @@
     package="com.transsnet.kika">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_CALENDAR"/>
-    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -22,12 +22,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LiveDataActivity"/>
+        <activity android:name=".LiveDataActivity" />
 
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".DispatchInterceptTouchActivity"
+            android:windowSoftInputMode="adjustResize" />
 
-        <service android:name=".util.OkhttpDownloadFileService"/>
+        <service android:name=".util.OkhttpDownloadFileService" />
 
 
         <meta-data

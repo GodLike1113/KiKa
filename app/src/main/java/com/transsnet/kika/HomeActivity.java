@@ -222,6 +222,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2);
                 break;
             case R.id.et3:
+                Intent intent3 = new Intent(this,DispatchInterceptTouchActivity.class);
+                startActivity(intent3);
+                break;
             case R.id.et4:
             case R.id.et5:
             case R.id.et6:
